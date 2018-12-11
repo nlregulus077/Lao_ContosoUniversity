@@ -3,16 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Lao_ContosoUniversity.Models.SchoolViewModels;
+using Microsoft.EntityFrameworkCore;
+using Lao_ContosoUniversity.Models;
+using Lao_ContosoUniversity.Data;
 
 namespace Lao_ContosoUniversity.Pages
 {
     public class AboutModel : PageModel
     {
-        public string Message { get; set; }
+        private readonly SchoolContext _context;
 
-        public void OnGet()
+        public AboutModel(SchoolContext context)
         {
-            Message = "Your application description page.";
+            _context = context;
+        }
+
+
+        public IList<EnrollmentDateGroup> Student { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            IQueryable<EnrollmentDateGroup> data =
+                from student in _context.Student
+                group student by student.EnrollmentDate into dateGroup
+                select new EnrollmentDateGroup()
+                {
+                    EnrollmentDate = dateGroup.Key,
+                    StudentCount = dateGroup.Count()
+                };
+
+            Student = await data.AsNoTracking().ToListAsync();
         }
     }
 }
