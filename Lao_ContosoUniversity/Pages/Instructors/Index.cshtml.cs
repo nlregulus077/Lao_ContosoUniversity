@@ -28,7 +28,7 @@ namespace Lao_ContosoUniversity.Pages.Instructors
             Instructor = new InstructorIndexData();
             Instructor.Instructors = await _context.Instructors
                 .Include(i => i.OfficeAssignment)
-                .Include(i => i.CourseAssingments)
+                .Include(i => i.CourseAssignments)
                     .ThenInclude(i => i.Course)
                         .ThenInclude(i => i.Department)
                 //    .Include(i => i.CourseAssingments)
@@ -44,7 +44,7 @@ namespace Lao_ContosoUniversity.Pages.Instructors
                 InstructorID = id.Value;
                 Instructor instructor = Instructor.Instructors.Single(
                     i => i.ID == id.Value);
-                Instructor.Courses = instructor.CourseAssingments.Select(s => s.Course);
+                Instructor.Courses = instructor.CourseAssignments.Select(s => s.Course);
             }
 
             if (courseID != null)

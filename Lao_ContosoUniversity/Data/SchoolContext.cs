@@ -6,6 +6,7 @@ using Lao_ContosoUniversity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lao_ContosoUniversity.Models
+
 {
     public class SchoolContext : DbContext
     {

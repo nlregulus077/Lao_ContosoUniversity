@@ -33,7 +33,7 @@ namespace Lao_ContosoUniversity.Models
             get { return LastName + ", " + FirstMidName; }
         }
 
-        public ICollection<CourseAssignment> CourseAssingments { get; set; }
+        public ICollection<CourseAssignment> CourseAssignments { get; set; }
         public OfficeAssignment OfficeAssignment { get; set; }
     }
 }
